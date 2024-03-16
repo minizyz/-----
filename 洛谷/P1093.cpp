@@ -8,16 +8,20 @@ struct student
 } students[305];
 bool compare(const student &a, const student &b)
 {
-    if(a.all==b.all){
-        if(a.chinese==b.chinese){
-            return a.id<b.id;
+    if (a.all == b.all)
+    {
+        if (a.chinese == b.chinese)
+        {
+            return a.id < b.id;
         }
-        else{
-            return a.chinese>b.chinese;
+        else
+        {
+            return a.chinese > b.chinese;
         }
     }
-    else{
-        return a.all>b.all;
+    else
+    {
+        return a.all > b.all;
     }
 }
 int main()
@@ -31,6 +35,10 @@ int main()
         students[i].id = i;
         students[i].all = students[i].chinese + math + english;
     }
-    sort(students+1,students+n+1,compare);
+    sort(students + 1, students + n + 1, compare);
+    for (int i = 1; i <= min(5, n); i++)
+    {
+        cout << students[i].id << " " << students[i].all << endl;
+    }
     return 0;
 }
