@@ -1,55 +1,46 @@
-#include <iostream>
-#include <utility>
-#include <queue>
+#include <bits/stdc++.h>
+#include <windows.h>
 using namespace std;
-int data[3000][3000], ans = 0;
-typedef pair<int, int> pos;
-void bfs(int x, int y, int n, int m)
+int m, n;
+int ans = 0;
+int a[105][105];
+typedef int X;
+typedef int Y;
+typedef struct
 {
-	queue<pos> q;
-	q.push(pos(x, y));
-	while (!(q.empty()))
+	int x, y;
+} node;
+int dx[5] = {0, 1, -1, 0, 0},
+	dy[5] = {0, 0, 0, -1, 1};
+void bfs(int x, int y)
+{
+	queue<node> q;
+	q.push({x, y});
+	while (!q.empty())
 	{
-		int nowx = q.front().first, nowy = q.front().second;
-		q.pop();
-		data[nowx][nowy] = 0;
-		if (data[nowx][nowy + 1])
-		{
-			q.push(pos(nowx, nowy + 1));
-		}
-		if (data[nowx][nowy - 1])
-		{
-			q.push(pos(nowx, nowy + 1));
-		}
-		if (data[nowx + 1][nowy])
-		{
-			q.push(pos(nowx, nowy + 1));
-		}
-		if (data[nowx - 1][nowy])
-		{
-			q.push(pos(nowx, nowy + 1));
-		}
 	}
-	ans++;
 }
 int main()
 {
-	int n, m;
 	cin >> n >> m;
+	string data;
+	getline(cin, data);
 	for (int i = 1; i <= n; i++)
 	{
-		for (int j = 1; j <= m; j++)
+		getline(cin, data);
+		for (int j = 0; j < m; j++)
 		{
-			data[i][j] = cin.get() - '0';
+			a[i][j + 1] = data[j] - '0';
 		}
 	}
 	for (int i = 1; i <= n; i++)
 	{
 		for (int j = 1; j <= m; j++)
 		{
-			if (data[i][j])
+			if (a[i][j] != 0)
 			{
-				bfs(i, j, n, m);
+				bfs(i, j);
+				ans++;
 			}
 		}
 	}
