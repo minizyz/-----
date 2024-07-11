@@ -1,2 +1,3 @@
-cd 一本通
+cd 一锟斤拷通
 del *.exe
+exit
