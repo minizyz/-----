@@ -63,7 +63,19 @@
 			"utility": "cpp",
 			"typeindex": "cpp",
 			"typeinfo": "cpp",
-			"valarray": "cpp"
+			"valarray": "cpp",
+			"algorithm": "cpp",
+			"cassert": "cpp",
+			"cerrno": "cpp",
+			"cfloat": "cpp",
+			"ciso646": "cpp",
+			"climits": "cpp",
+			"iterator": "cpp",
+			"memory": "cpp",
+			"map": "cpp",
+			"queue": "cpp",
+			"set": "cpp",
+			"stack": "cpp"
 		}
 	}
 }

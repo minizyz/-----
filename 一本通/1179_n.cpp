@@ -33,4 +33,10 @@ int main()
 		students.push_back(tmp);
 	}
 	sort(students.begin(), students.end(), cmp);
+	int ans = min(5, n);
+	for (int i = 0; i < ans; i++)
+	{
+		cout << students[i].id << ' ' << students[i].score << endl;
+	}
+	return 0;
 }

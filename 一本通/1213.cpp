@@ -1,47 +1,43 @@
 #include <iostream>
-#include <cmath>
-#include <cstdlib>
+#include <iomanip>
 using namespace std;
-int queen[9];
-bool x1[20],x2[20],y[30];
+bool cos[10], a[30], b[30];
+bool queens[15][15];
 int ans = 0;
-void QueenPrint()
+void Print()//打印 
 {
-	cout << "No." << (++ans) << endl;
+	++ans;
+	cout << "No. " << ans << endl;
 	for (int i = 1; i <= 8; i++)
 	{
 		for (int j = 1; j <= 8; j++)
 		{
-			cout << (queen[i] == j ? "1" : "_") << ' ';
+			cout << (queens[i][j] ? '1' : '0') << ' ';//如果对应项是true,那么对应输出1，否则输出0 
 		}
 		cout << endl;
 	}
-	system("pause&cls");
 }
-inline bool isOK(int x,int y,int i){
-	
-}
-void Queen(int step)
+void Queen(int i)
 {
-	if (step == 9)
-	{
-		QueenPrint();
+	if(i>8){
+		Print();
+		return;
 	}
-	for (int i = 1; i <= 8; i++)
-	{
-		if (isOK(step, i))
-		{
-			
-			Queen(step + 1);
+	for(int j=1;j<=8;j++){
+		if(!cos[j]&&!a[i-j+7]&&!b[i+j]){
+			queens[i][j]=true;//标记势力 
+			cos[j]=true;
+			a[i-j+7]=true;
+			b[i+j]=true;
+			Queen(i+1);
+			cos[j]=false;//撤销标记势力 
+			a[i-j+7]=false;
+			b[i+j]=false;
+			queens[i][j]=false;
 		}
 	}
 }
 int main()
 {
-	for (int i = 1; i <= 8; i++)
-	{
-		queen[1] = i;
-		Queen(2);
-	}
-	return 0;
+	Queen(1);
 }
