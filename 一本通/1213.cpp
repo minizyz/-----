@@ -8,9 +8,9 @@ void Print()//打印
 {
 	++ans;
 	cout << "No. " << ans << endl;
-	for (int i = 1; i <= 8; i++)
+	for (int j = 1; j <= 8; j++)
 	{
-		for (int j = 1; j <= 8; j++)
+		for (int i = 1; i <= 8; i++)
 		{
 			cout << (queens[i][j] ? '1' : '0') << ' ';//如果对应项是true,那么对应输出1，否则输出0 
 		}
