@@ -1,40 +1,74 @@
-#include <bits/stdc++.h>
-#define N 100001 // 定义数组最大大小为100001
+#include <iostream>
 using namespace std;
-int a[N]; // 创建全局数组
-
-// 快速选择算法，用于找到数组中第k大的元素范围
-void find(int st, int ed, int k) {
-    if (ed - st + 1 == k) return; // 如果区间长度等于k，说明已找到，无需进一步处理
-
-    int i = st, j = ed, key = a[st]; // 以区间的第一个元素为基准值
-    while (i < j) {
-        while (i < j && a[j] >= key) j--; // 从右向左找第一个小于基准值的元素
-        a[i] = a[j]; // 将找到的小值移动到左边
-        while (i < j && a[i] <= key) i++; // 从左向右找第一个大于基准值的元素
-        a[j] = a[i]; // 将找到的大值移动到右边
+int a[200005];
+int ans[100005];
+int counter[100005];
+int partion(int left, int right)
+{
+    return (left + right) / 2;
+}
+void swap(int &x, int &y)
+{
+    int tmp = x;
+    x = y;
+    y = tmp;
+}
+int Paritition1(int A[], int low, int high)
+{
+    int pivot = A[low];
+    while (low < high)
+    {
+        while (low < high && A[high] >= pivot)
+        {
+            --high;
+        }
+        A[low] = A[high];
+        while (low < high && A[low] <= pivot)
+        {
+            ++low;
+        }
+        A[high] = A[low];
     }
-    a[j] = key; // 将基准值放到正确的位置
-
-    if (ed - i + 1 == k)
-        return; // 如果右侧元素正好是k个，说明这些就是所需的元素
-    else if (ed - i + 1 > k)
-        find(i + 1, ed, k); // 如果右侧元素多于k个，继续在右侧找
-    else
-        find(st, i - 1, k - (ed - i + 1)); // 如果右侧元素不足k个，还需要从左侧找更多
+    A[low] = pivot;
+    return low;
 }
 
-int main() {
-    int n, k;
-    cin >> n; // 输入数组的大小
-    for (int i = 0; i < n; i++) {
-        scanf("%d", &a[i]); // 读入数组元素
+void QuickSort(int A[], int low, int high) 
+{
+    if (low < high)
+    {
+        int pivot = Paritition1(A, low, high);
+        QuickSort(A, low, pivot - 1);
+        QuickSort(A, pivot + 1, high);
     }
-    cin >> k; // 输入k值
-    find(0, n-1, k); // 调用快速选择函数
-    sort(a + n - k, a + n); // 对找到的k个元素进行排序
-    for (int i = n - 1; i >= n - k; i--) {
-        printf("%d\n", a[i]); // 输出结果，从大到小
+}
+int main()
+{
+    int n;
+    cin >> n;
+    for (int i = 1; i <= n; i++)
+    {
+        cin >> a[i];
     }
-    return 0;
+    int unicnt = 0, last = 0x33003300;
+    QuickSort(a, 1, n);
+    for (int i = 1; i <= n; i++)
+    {
+        if (a[i] != last)
+        {
+            unicnt++;
+            ans[unicnt] = a[i];
+            counter[unicnt] += 1;
+            last = a[i];
+        }
+        else
+        {
+            counter[unicnt]++;
+        }
+    }
+
+    for (int i = 1; i <= unicnt; i++)
+    {
+        cout << ans[i] << " " << counter[i] << endl;
+    }
 }
